@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {WelcomeStackHomeProps} from './types';
+import {WelcomeStackHomeProps} from './types/navigation';
 
 function WelcomeView({navigation}: WelcomeStackHomeProps) {
   return (

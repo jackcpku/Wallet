@@ -8,14 +8,23 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ShowSeedPhraseView from './ShowSeedPhraseView';
 import WelcomeView from './WelcomeView';
 import HomeView from './HomeView';
+import {Provider, useSelector} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistor, store} from './store';
+import {Text} from 'react-native';
+import {ReduxState} from './types/redux';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+const App = () => {
+  const seedphraseGenerated = useSelector(
+    (state: ReduxState) => state.seedphrase.generated,
+  );
+
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator
-        initialRouteName="Welcome"
+        initialRouteName={seedphraseGenerated ? 'HomeView' : 'Welcome'}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Welcome" component={WelcomeView} />
         <Stack.Screen
@@ -26,4 +35,12 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default () => (
+  <Provider store={store}>
+    <PersistGate loading={<Text>Loading</Text>} persistor={persistor}>
+      <App />
+    </PersistGate>
+  </Provider>
+);

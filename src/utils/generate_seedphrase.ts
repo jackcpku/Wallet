@@ -9,5 +9,5 @@ import {ethers} from 'ethers';
 
 export default () => {
   const wallet = ethers.Wallet.createRandom();
-  return wallet.mnemonic;
+  return wallet.mnemonic.phrase;
 };

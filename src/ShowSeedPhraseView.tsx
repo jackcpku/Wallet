@@ -1,15 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {WelcomeStackShowSeedPhraseProps} from './types';
+import {useDispatch, useSelector} from 'react-redux';
+import {GENERATE_SEEDPHRASE} from './const';
+import {WelcomeStackShowSeedPhraseProps} from './types/navigation';
+import {ReduxState} from './types/redux';
 import generate_seedphrase from './utils/generate_seedphrase';
 
 const ShowSeedPhraseView = ({navigation}: WelcomeStackShowSeedPhraseProps) => {
-  const seedPhrase = generate_seedphrase().phrase;
+  const dispatch = useDispatch();
+  const [seedphrase, setSeedphrase] = useState(
+    useSelector((state: ReduxState) => state.seedphrase.mnemonic),
+  );
+
+  useEffect(() => {
+    const seedphraseTmp = generate_seedphrase();
+
+    setSeedphrase(seedphraseTmp);
+
+    dispatch({
+      type: GENERATE_SEEDPHRASE,
+      payload: seedphraseTmp,
+    });
+  }, [dispatch]);
 
   return (
     <SafeAreaView>
-      <Text>{seedPhrase}</Text>
+      <Text>{seedphrase}</Text>
       <Button
         title="Back"
         onPress={() => {
@@ -19,7 +36,9 @@ const ShowSeedPhraseView = ({navigation}: WelcomeStackShowSeedPhraseProps) => {
       <Button
         title="Continue"
         onPress={() => {
-          navigation.navigate('HomeView');
+          // According to https://stackoverflow.com/questions/68063572/how-to-clear-navigation-history-in-react-native
+          // `replace` disables going back to the previous screen
+          navigation.replace('HomeView');
         }}
       />
     </SafeAreaView>
