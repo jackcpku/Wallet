@@ -2,6 +2,8 @@ export interface ReduxState {
   seedphrase: {
     generated: boolean;
     mnemonic: string;
+    privateKey: string;
+    address: string;
   };
 }
 
