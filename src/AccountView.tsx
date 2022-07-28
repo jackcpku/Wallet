@@ -1,16 +1,16 @@
 import React from 'react';
 import {Button, ScrollView, Text} from 'react-native';
 import {useSelector} from 'react-redux';
-import {AccountStackSendViewProps} from './types/navigation';
+import {AccountStackSendView1Props} from './types/navigation';
 import {ReduxState} from './types/redux';
 import {useEthBalance} from './utils/hooks';
 
-export default ({navigation}: AccountStackSendViewProps) => {
+export default ({navigation}: AccountStackSendView1Props) => {
   const address = useSelector((state: ReduxState) => state.seedphrase.address);
   const ethBalance = useEthBalance(address);
 
   const gotoSendFlow = () => {
-    navigation.push('SendView');
+    navigation.push('SendView1');
   };
   return (
     <ScrollView>

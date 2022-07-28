@@ -20,10 +20,16 @@ export type WelcomeStackHomeProps = NativeStackScreenProps<
 // export type
 export type AccountStackParamList = {
   AccountView: undefined;
-  SendView: undefined;
+  SendView1: undefined;
+  SendView2: {receiver: string};
 };
 
-export type AccountStackSendViewProps = NativeStackScreenProps<
+export type AccountStackSendView1Props = NativeStackScreenProps<
   AccountStackParamList,
-  'SendView'
+  'SendView1'
+>;
+
+export type AccountStackSendView2Props = NativeStackScreenProps<
+  AccountStackParamList,
+  'SendView2'
 >;
