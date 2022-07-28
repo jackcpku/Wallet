@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
-import {GENERATE_SEEDPHRASE} from './const';
+import {FINISH_WELCOME, GENERATE_SEEDPHRASE} from './const';
 import {WelcomeStackShowSeedPhraseProps} from './types/navigation';
 import {ReduxState} from './types/redux';
 import generate_seedphrase from './utils/generate_seedphrase';
@@ -38,6 +38,9 @@ const ShowSeedPhraseView = ({navigation}: WelcomeStackShowSeedPhraseProps) => {
         onPress={() => {
           // According to https://stackoverflow.com/questions/68063572/how-to-clear-navigation-history-in-react-native
           // `replace` disables going back to the previous screen
+          dispatch({
+            type: FINISH_WELCOME,
+          });
           navigation.replace('HomeView');
         }}
       />

@@ -1,4 +1,7 @@
 export interface ReduxState {
+  appState: {
+    welcomeDone: boolean;
+  };
   seedphrase: {
     generated: boolean;
     mnemonic: string;
