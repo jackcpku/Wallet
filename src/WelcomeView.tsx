@@ -14,6 +14,12 @@ function WelcomeView({navigation}: WelcomeStackHomeProps) {
           navigation.navigate('ShowSeedPhraseView');
         }}
       />
+      <Button
+        title="Import SeedPhrase"
+        onPress={() => {
+          navigation.navigate('ImportSeedphraseView');
+        }}
+      />
     </SafeAreaView>
   );
 }
